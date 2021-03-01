@@ -23,11 +23,27 @@ class Recipe
 
     );
 
+    public function __construct($title = null)
+    {
+        $this->setTitle($title);
+    }
+    
+    public function __toString()
+    {
+        $output = "You are calling a " . __CLASS__ . " object with the title \r\n";
+        $output .= $this->getTitle() . "\r\n";
+        $output .= "It is stored in " . basename(__FILE__) . " at " . __DIR__ . ".";
+        $output .= "This display is from line " . __LINE__ . " in the " . __METHOD__ . " method.";
+        $output .= "The following methods are available for objects of this class: \r\n";
+        $output .= implode("\r\n", get_class_methods(__CLASS__));
+        return $output;
+    }
+
     public function setTitle($title)
     {
-        if(empty($title)){
+        if (empty($title)) {
             $this->title = null;
-        }else{
+        } else {
             $this->title = ucwords($title);
         }
     }
